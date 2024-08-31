@@ -3,17 +3,17 @@
 
 struct node{
     int data;
-    struct node*link;
+    struct node* link;
 };
 struct node*head=NULL;
 
-void insertion_at_beginning(){
-    struct node*newnode=(struct node*)malloc(sizeof(struct node*));
+void insert_at_beginning(){
+    struct node*newnode=(struct node*)malloc(sizeof(struct node));
     int element;
     if(newnode==NULL){
-        printf("memory insuffient\n");
+        printf("memory insuffient!\n");
     }else{
-        printf("Enter element: ");
+        printf("Enter data: ");
         scanf("%d",&element);
         newnode->data=element;
         newnode->link=head;
@@ -21,91 +21,80 @@ void insertion_at_beginning(){
     }
 }
 
-void insertion_at_ending(){
-    struct node*newnode=(struct node*)malloc(sizeof(struct node*));
+void insert_at_ending(){
+    struct node*newnode=(struct node*)malloc(sizeof(struct node));
     struct node*temp=head;
     int element;
+    printf("Enter data: ");
+    scanf("%d",&element);
     
     if(newnode==NULL){
-        printf("memory insuffient");
+        printf("memory insuffient!\n");
     }else{
-        printf("Enter element: ");
-        scanf("%d",&element);
         newnode->data=element;
-        if(head==NULL){
-            newnode->data=element;
-            head=newnode;
-        }else{
-            while(temp->link!=NULL){
-                temp=temp->link;
-            }
-            temp->link=newnode;
-            newnode->link=NULL;
+        while(temp->link!=NULL){
+            temp=temp->link;
         }
+        temp->link=newnode;
+        newnode->link=NULL;
     }
 }
 
-
-
-void insertion_at_position(){
-    struct node*newnode=(struct node*)malloc(sizeof(struct node*));
+void insert_at_position(){
+    struct node*newnode=(struct node*)malloc(sizeof(struct node));
     struct node*temp=head;
-    int element,pos;
+    int position,element;
+    printf("Enter position: ");
+    scanf("%d",&position);
+    printf("Enter data: ");
+    scanf("%d",&element);
     
     if(newnode==NULL){
-        printf("memory insuffient");
+        printf("memory insuffient!\n");
     }else{
-        printf("Enter position:");
-        scanf("%d",&pos);
-        printf("Enter element: ");
-        scanf("%d",&element);
-        newnode->data=element;
-        newnode->link=NULL;
-        while(pos!=1){
-            newnode=newnode->link;
-            pos--;
+        for(int i=1;i<position;i++){
+            temp=temp->link;
         }
+        newnode->data=element;
         newnode->link=temp->link;
         temp->link=newnode;
     }
 }
 
-
-
-void traverse(){
-    struct node *temp;
-    temp=head;
+void traversal(){
+    struct node*temp=head;
     if(temp==NULL){
-        printf("list is empty.\n");
+        printf("empty list!");
     }else{
         while(temp!=NULL){
-            printf("->%d",temp->data);
+            printf("%d->",temp->data);
             temp=temp->link;
         }
     }
 }
 
+
 int main()
 {
     int option;
     while(1){
-        printf("\nSelect option: \n1.Insertion at beginning\n2.Insertion at ending\n3.Insert at Specific position\n4.traverse\n");
+        printf("\nChoose operation: \n1.insert_at_beginning\n2.insert_at_ending\n3.insert_at_position\n4.traversal\n");
         scanf("%d",&option);
-        switch(option){
-            case 1:
-                insertion_at_beginning();
-                break;
-            case 2:
-                insertion_at_ending();
-                break;
-            case 3:
-                insertion_at_position();
-                break;
-            case 4:
-                traverse();
-                break;
-            default:
-                printf("\ninvalid option\n");
-        }
+        switch (option){
+        case 1:
+            insert_at_beginning();
+            break;
+        case 2:
+            insert_at_ending();
+            break;
+        case 3:
+            insert_at_position();
+            break;
+        case 4:
+            traversal();
+            break;
+        default:
+            printf("Invalid option!\n");
+    }
     }
 }
