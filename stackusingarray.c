@@ -1,75 +1,71 @@
 #include <stdio.h>
-#define n 10
+#include <stdlib.h>
 
-int stak[n];
-int top=-1;
 
-void push(){
-    int value;
-    if(top==n-1){
-        printf("Stack is full.\n");
+void push(int n,int *top,int stac[]){
+    if(*top>=n-1){
+        printf("can't insert stack is full!");
     }else{
-        top++;
-        printf("ENTER AN ELEMENT TO INSERT : ");
-        scanf("%d",&value);
-        stak[top]=value;
+        int data;
+        printf("enter data to push: ");
+        scanf("%d",&data);
+        (*top)++;
+        stac[*top]=data;
     }
 }
 
-void pop(){
-    if(top==-1){
-        printf("Stack is empty.\n");
+void pop(int n,int *top,int stac[]){
+    if(*top==-1){
+        printf("stack is empty");
     }else{
-        stak[top]=0;
-        top--;
+        (*top)--;
     }
 }
 
-void peek(){
-    if(top==-1){
-        printf("Stack is empty. \n");
+void peek(int n,int *top,int stac[]){
+    if(*top==-1){
+        printf("stack is empty");
     }else{
-        printf("%d",stak[top]);
+        printf("%d\n",stac[*top]);
     }
 }
 
-void display(){
-    if(top==-1){
-        printf("STACK IS EMPTY\n");
+void dislay(int n,int *top,int stac[]){
+    if(*top==-1){
+        printf("stack is empty\n");
     }else{
-        for(int i=0;i<n-1;i++){
-            printf("%d ",stak[i]);
+        for(int i=0;i<=*top;i++){
+            printf("%d ",stac[i]);
         }
-        printf("\n");
     }
 }
-
-
 
 int main()
 {
-    int option, value;
+    int n=5;
+    int stac[n];
+    int top=-1;
+    int option;
+    
     while(1){
-        printf("\n\n\nSELECT OPTION:\n1.push()\n2.pop()\n3.peek()\n4.display()\n");
+        printf("\nchoose option:\n1.push\n2.pop\n3.peek\n4.dislay\n");
         scanf("%d",&option);
-        
         switch(option){
             case 1:
-                push();
+                push(n,&top,stac);
                 break;
             case 2:
-                pop();
+                pop(n,&top,stac);
                 break;
             case 3:
-                peek();
+                peek(n,&top,stac);
                 break;
             case 4:
-                display();
+                dislay(n,&top,stac);
                 break;
             default:
-                printf("\nCHOOSE THE VALID OPTION!\n");
-                
+                printf("invalid option!");
+            
         }
     }
-    
 }
