@@ -1,5 +1,3 @@
-//stack using single_linkedlist
-
 #include <stdio.h>
 #include <stdlib.h>
 
