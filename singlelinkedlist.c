@@ -29,16 +29,16 @@ void insert_at_ending() {
 	printf("Enter data: ");
 	scanf("%d",&element);
 	if(temp==NULL) {
-	    newnode->data=element;
-	    newnode->link=NULL;
+		newnode->data=element;
+		newnode->link=NULL;
 		head=newnode;
-	}else{
-	    while(temp->link!=NULL){
-		    temp=temp->link;
-	    }
-	    temp->link=newnode;
-	    newnode->data=element;
-	    newnode->link=NULL;
+	} else {
+		while(temp->link!=NULL) {
+			temp=temp->link;
+		}
+		temp->link=newnode;
+		newnode->data=element;
+		newnode->link=NULL;
 	}
 }
 
@@ -52,12 +52,12 @@ void insert_at_position() {
 	scanf("%d",&position);
 	printf("Enter data: ");
 	scanf("%d",&element);
-	
-	while(temp1!=NULL){
-		    temp1=temp1->link;
-		    cnt++;
+
+	while(temp1!=NULL) {
+		temp1=temp1->link;
+		cnt++;
 	}
-	
+
 	if(position>cnt) {
 		printf("position is bigger than linkedlist size!");
 		return;
@@ -76,21 +76,21 @@ void delete_at_beginning() {
 	if(head==NULL) {
 		printf("list is empty");
 		return;
-	}else{
-	    head=temp->link;
-	    free(temp);
+	} else {
+		head=temp->link;
+		free(temp);
 	}
 }
 
 void delete_at_ending() {
 	struct node*temp=head;
 	struct node*temp1;
-	if(head==NULL){
+	if(head==NULL) {
 		printf("list is empty");
-	}else if(head->link==NULL){
-	    free(head);
-	    head=NULL;
-	}else{
+	} else if(head->link==NULL) {
+		free(head);
+		head=NULL;
+	} else {
 		while(temp->link!=NULL) {
 			temp1=temp;
 			temp=temp->link;
@@ -100,8 +100,27 @@ void delete_at_ending() {
 	}
 }
 
-void delete_at_pos(){
+void delete_at_pos() {
+	struct node *temp=head;
+	struct node *temp1;
+	int pos;
+	printf("Enter position to Delete: ");
+	scanf("%d",&pos);
 	
+	if(head==NULL){
+	    printf("List is Empty!");
+	}else if(pos==0){
+	    temp=head;
+	    head=temp->link;
+	    free(temp);
+	}else{
+	    for(int i=0; i<pos-1; i++) {
+		    temp=temp->link;
+	    }
+	    temp1=temp->link;
+	    temp->link=temp1->link;
+	    free(temp1);
+	}
 }
 
 
