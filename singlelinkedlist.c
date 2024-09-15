@@ -100,7 +100,7 @@ void delete_at_ending() {
 	}
 }
 
-void delete_at_pos() {
+void delete_at_position() {
 	struct node *temp=head;
 	struct node *temp1;
 	int pos;
@@ -177,7 +177,7 @@ int main() {
 			delete_at_ending();
 			break;
 		case 6:
-			delete_at_pos();
+			delete_at_position();
 			break;
 		case 7:
 			traversal();
