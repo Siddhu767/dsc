@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    char data;
+    struct node *left;
+    struct node *right;
+};
+
+struct node *create();
+void preorder(struct node *t);
+void inorder(struct node *t);
+void postorder(struct node *t);
+
+int main() {
+    struct node *root = NULL;
+    int ch;
+    
+    while (1) {
+        printf("1.Create \n2.Preorder \n3.Inorder \n4.Postorder \n5.Exit \n");
+        printf("Enter your choice: ");
+        scanf("%d", &ch);
+        
+        switch (ch) {
+            case 1: 
+                root = create();
+                break;
+            case 2: 
+                preorder(root);
+                printf("\n");
+                break;
+            case 3: 
+                inorder(root);
+                printf("\n");
+                break;
+            case 4: 
+                postorder(root);
+                printf("\n");
+                break;
+            case 5: 
+                exit(0);
+            default: 
+                printf("Invalid choice\n");
+        }
+    }
+    return 0;
+}
+
+struct node *create() {
+    struct node *p;
+    char x;
+    
+    printf("Enter node data ('*' for no data): ");
+    scanf(" %c", &x);  // Note the space before %c to skip whitespace characters
+    
+    if (x == '*')
+        return NULL;
+    
+    p = (struct node *)malloc(sizeof(struct node));
+    p->data = x;
+    
+    printf("Enter the left child of %c:\n", x);
+    p->left = create();
+    
+    printf("Enter the right child of %c:\n", x);
+    p->right = create();
+    
+    return p;
+}
+
+void preorder(struct node *t) {
+    if (t != NULL) {
+        printf("%c ", t->data);
+        preorder(t->left);
+        preorder(t->right);
+    }
+} 
+
+void inorder(struct node *t) {
+    if (t != NULL) {
+        inorder(t->left);
+        printf("%c ", t->data);
+        inorder(t->right);
+    }
+}        
+
+void postorder(struct node *t) {
+    if (t != NULL) {
+        postorder(t->left);
+        postorder(t->right);
+        printf("%c ", t->data);
+    }
+}
